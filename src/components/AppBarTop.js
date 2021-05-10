@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: '#C6D8D3',
-    color: '#22031F',
+    backgroundColor: '#fafafa',
+    color: '#0C1618',
     boxShadow: 'none',
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
-    borderBottomColor: '#65617D99',
+    borderBottomColor: '#0C161899',
   },
   logo: {
     width: '7rem',
