@@ -6,13 +6,53 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 import Footer from '../components/Footer.js';
 
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
 const myTheme = createMuiTheme({
   palette: {
     primary: {
-      main: '#5750BE',
+      main: '#542344',
     },
     secondary: {
-      main: '#65617D',
+      main: '#0E1C36',
       contrastText: '#5750BE',
     },
     info: {
@@ -39,78 +79,64 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 0,
     paddingRight: 0,
   },
-  banner: {
-    paddingTop: 15,
-    color: '#2F2E41',
-    '& > *': {
-      marginRight: theme.spacing(1),
-    },
-  },
-  bannerImage: {
-    height: '20rem',
-  },
-  subSectionImage: {
-    height: '15rem',
-  },
-  bannerHeading: {
-    marginTop: 0,
-    marginBottom: 10,
-    lineHeight: '2rem',
-    fontSize: '2rem',
-  },
-  bannerSubHeading: {
-    marginTop: '2rem',
-    marginBottom: 10,
-    lineHeight: '2rem',
-    fontSize: '1.3rem',
-  },
-  listItem: {
-    color: '#65617D',
-    textAlign: 'center',
-  },
-  patnerListItem: {
-    color: '#65617D',
-    textAlign: 'right',
-  },
-
-  bannerSubtext: {
-    marginBottom: '1rem',
-  },
-  productsSection: {
-    textAlign: 'center',
-  },
-  productsSectionIcons: {
-    textAlign: 'center',
-    width: '5rem',
-    height: '5rem',
-    padding: '1.4rem',
-    borderRadius: '15px',
-    backgroundColor: '#5750BE22',
-  },
-  section: {
-    marginBottom: '2rem',
-  },
-  sectionHeading: {
-    marginTop: 0,
-    textAlign: 'center',
-    marginBottom: 5,
-    lineHeight: '2rem',
-    fontSize: '2rem',
-  },
-  sectionText: {
-    textAlign: 'justify',
-    marginBottom: '1rem',
+  appBar: {
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#0C161899',
+    paddingTop: '3px',
   },
 }));
 
 export default function AboutUs() {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (_event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className={classes.root}>
       <CssBaseline>
         <ThemeProvider theme={myTheme}>
-          <Container className={classes.pageRoot}>About Us</Container>
+          <Container className={classes.pageRoot}>
+            <AppBar
+              position="static"
+              color="transparent"
+              elevation={0}
+              className={classes.appBar}
+            >
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="secondary"
+                variant="fullWidth"
+                aria-label="simple tabs example"
+              >
+                <Tab label="Bold History" {...a11yProps(0)} />
+                <Tab label="Mission, Vission & Values" {...a11yProps(1)} />
+                <Tab label="Focus" {...a11yProps(2)} />
+                <Tab label="Achievements & Milestones" {...a11yProps(3)} />
+                <Tab label="PIU Anthem" {...a11yProps(4)} />
+              </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+              Item One
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              Item Two
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              Item Three
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              Item Four
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+              Item Five
+            </TabPanel>
+          </Container>
         </ThemeProvider>
       </CssBaseline>
 
