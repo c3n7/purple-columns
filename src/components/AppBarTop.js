@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: '#fafafa',
-    color: '#2f2e41',
+    backgroundColor: '#C6D8D3',
+    color: '#22031F',
     boxShadow: 'none',
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
